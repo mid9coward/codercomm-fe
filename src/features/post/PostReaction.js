@@ -5,13 +5,11 @@ import React from "react";
 import { useDispatch } from "react-redux";
 import { sendPostReaction } from "./postSlice";
 
-function PostReaction({ post }) {
+function PostReaction({ comment, post }) {
   const dispatch = useDispatch();
-
   const handleClick = (emoji) => {
     dispatch(sendPostReaction({ postId: post._id, emoji }));
   };
-
   return (
     <Stack direction="row" alignItems="center">
       <IconButton onClick={() => handleClick("like")}>
