@@ -31,12 +31,15 @@ import EditIcon from "@mui/icons-material/Edit";
 
 import { deletePost } from "./postSlice";
 import { useDispatch } from "react-redux";
+import useAuth from "../../hooks/useAuth";
 
 function PostCard({ post, handleUpdate }) {
   const dispatch = useDispatch();
   const [anchorEl, setAnchorEl] = useState(null);
   const [openDialog, setOpenDialog] = useState(false);
   const open = Boolean(anchorEl);
+  const { user } = useAuth();
+  const userId = user?._id;
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -78,9 +81,11 @@ function PostCard({ post, handleUpdate }) {
         }
         action={
           <>
-            <IconButton onClick={handleClick}>
-              <MoreVertIcon sx={{ fontSize: 30 }} />
-            </IconButton>
+            {userId === post.author._id && (
+              <IconButton onClick={handleClick}>
+                <MoreVertIcon sx={{ fontSize: 30 }} />
+              </IconButton>
+            )}
             <Menu
               open={open}
               anchorEl={anchorEl}

@@ -8,7 +8,6 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as Yup from "yup";
 import { LoadingButton } from "@mui/lab";
 
-
 const yupSchema = Yup.object().shape({
   content: Yup.string().required("Content is required"),
 });
@@ -20,7 +19,6 @@ const defaultValues = {
 
 function PostForm({ submit, post = defaultValues }) {
   const { isLoading } = useSelector((state) => state.post);
-
   const methods = useForm({
     resolver: yupResolver(yupSchema),
     defaultValues: { ...post },

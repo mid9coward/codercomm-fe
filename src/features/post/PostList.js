@@ -39,16 +39,15 @@ function PostList({ userId }) {
     if (userId) dispatch(getPosts({ userId, page }));
   }, [userId, page, dispatch]);
 
-  const hanldeUpdatePost = (post) => {
+  const handleUpdatePost = (post) => {
     setPostUpdated(post);
   };
-
   return (
     <>
       {posts.map((post) => (
         <PostCard
           handleUpdate={() => {
-            hanldeUpdatePost(post);
+            handleUpdatePost(post);
           }}
           key={post._id}
           post={post}
@@ -82,6 +81,7 @@ function PostList({ userId }) {
           <UpdatePost
             {...postUpdated}
             callback={() => {
+              dispatch(getPosts({ userId, page }));
               setPostUpdated(null);
             }}
           />
